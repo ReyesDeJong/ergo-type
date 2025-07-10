@@ -1,5 +1,25 @@
-# .coderabbit/config.yml
+output:
+  summary: false
+  walkthrough: false
+  poem: false
+  tips: false
+  nitpicks: true
+
 rules:
-  - name: general-quality
-    description: Check for code clarity and maintainability
+  - name: maintainability
+    description: Flag anti-patterns, complex logic, and unclear structure
     enabled: true
+    config:
+      focus: essential
+
+  - name: readability
+    description: Catch unclear naming, structure, and comments
+    enabled: true
+    config:
+      focus: essential
+
+  - name: best-practices
+    description: Check for code hygiene, misuse of language features, or style inconsistencies
+    enabled: true
+    config:
+      focus: essential
