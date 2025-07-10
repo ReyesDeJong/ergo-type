@@ -19,10 +19,18 @@
     "clean": "npm run clean --workspaces --if-present",
     "db:generate": "npm run db:generate --workspace=backend",
     "db:migrate": "npm run db:migrate --workspace=backend",
-    "db:seed": "npm run db:seed --workspace=backend"
+    "db:seed": "npm run db:seed --workspace=backend",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,json,md,css,scss,html}": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
     "@types/node": "^24.0.13",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
     "prettier": "^3.6.2",
     "typescript": "^5.8.3"
   },
