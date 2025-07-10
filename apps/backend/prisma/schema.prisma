@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Keyboard {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  price       Float
+  brand       String
+  layout      String   // e.g., "split", "ergonomic", "standard"
+  switches    String?  // e.g., "cherry-mx-blue", "gateron-red"
+  keycaps     String?  // e.g., "PBT", "ABS"
+  wireless    Boolean  @default(false)
+  rgb         Boolean  @default(false)
+  imageUrl    String?
+  inStock     Boolean  @default(true)
+  stockCount  Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("keyboards")
+}
