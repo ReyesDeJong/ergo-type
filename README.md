@@ -51,10 +51,11 @@ This project is designed to teach fullstack software engineering concepts throug
 - **Form Handling**: React Hook Form + Zod
 
 ### Development Tools
-- **Package Manager**: pnpm
-- **Linting**: ESLint + Prettier
+- **Package Manager**: pnpm (workspace support)
+- **Code Formatting**: Prettier (configured)
+- **Linting**: ESLint (to be configured)
 - **Type Checking**: TypeScript strict mode
-- **Git Hooks**: Husky + lint-staged
+- **Git Hooks**: Husky + lint-staged (to be configured)
 - **Database**: Docker for local development
 
 ## 📁 Project Structure
@@ -87,9 +88,11 @@ ergo-type/
 │       ├── tests/               # Frontend tests
 │       └── package.json
 │
-├── shared/                      # Shared types and utilities
-├── docs/                        # Project documentation
-├── scripts/                     # Development scripts
+├── .gitignore                   # Git ignore rules
+├── .prettierrc                  # Prettier configuration
+├── .prettierignore              # Prettier ignore rules
+├── package.json                 # Root package.json with workspace config
+├── pnpm-workspace.yaml          # pnpm workspace configuration
 └── README.md
 ```
 
@@ -97,7 +100,7 @@ ergo-type/
 
 ### Prerequisites
 - Node.js 18+
-- pnpm
+- pnpm (install with `npm install -g pnpm` or `brew install pnpm`)
 - Docker & Docker Compose
 - PostgreSQL 15+
 
@@ -107,8 +110,15 @@ ergo-type/
 git clone <repository-url>
 cd ergo-type
 
+# Install pnpm (if not already installed)
+npm install -g pnpm
+# or: brew install pnpm
+
 # Install dependencies
 pnpm install
+
+# Format code
+pnpm format
 
 # Start development environment
 pnpm dev
@@ -123,9 +133,10 @@ pnpm lint
 ## 📋 Development Roadmap
 
 ### Phase 1: Project Setup & Foundation
-- [ ] Initialize monorepo structure
-- [ ] Set up TypeScript configurations
-- [ ] Configure ESLint, Prettier, and Husky
+- [x] Initialize monorepo structure
+- [x] Set up TypeScript configurations
+- [x] Configure Prettier
+- [ ] Configure ESLint and Husky
 - [ ] Set up PostgreSQL with Docker
 - [ ] Initialize Prisma schema
 - [ ] Create basic Express server
