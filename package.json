@@ -8,27 +8,25 @@
     "shared/*"
   ],
   "scripts": {
-    "dev": "pnpm --parallel --recursive run dev",
-    "build": "pnpm --recursive run build",
-    "test": "pnpm --recursive run test",
-    "lint": "pnpm --recursive run lint",
-    "lint:fix": "pnpm --recursive run lint:fix",
+    "dev": "npm run dev --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "lint:fix": "npm run lint:fix --workspaces --if-present",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "type-check": "pnpm --recursive run type-check",
-    "clean": "pnpm --recursive run clean",
-    "db:generate": "pnpm --filter backend run db:generate",
-    "db:migrate": "pnpm --filter backend run db:migrate",
-    "db:seed": "pnpm --filter backend run db:seed"
+    "type-check": "npm run type-check --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present",
+    "db:generate": "npm run db:generate --workspace=backend",
+    "db:migrate": "npm run db:migrate --workspace=backend",
+    "db:seed": "npm run db:seed --workspace=backend"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "prettier": "^3.0.0",
-    "typescript": "^5.0.0"
+    "@types/node": "^24.0.13",
+    "prettier": "^3.6.2",
+    "typescript": "^5.8.3"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "pnpm": ">=8.0.0"
-  },
-  "packageManager": "pnpm@8.0.0"
+    "node": ">=18.0.0"
+  }
 }

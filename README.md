@@ -51,7 +51,7 @@ This project is designed to teach fullstack software engineering concepts throug
 - **Form Handling**: React Hook Form + Zod
 
 ### Development Tools
-- **Package Manager**: pnpm (workspace support)
+- **Package Manager**: npm (workspace support)
 - **Code Formatting**: Prettier (configured)
 - **Linting**: ESLint (to be configured)
 - **Type Checking**: TypeScript strict mode
@@ -100,7 +100,7 @@ ergo-type/
 
 ### Prerequisites
 - Node.js 18+
-- pnpm (install with `npm install -g pnpm` or `brew install pnpm`)
+- npm (comes with Node.js)
 - Docker & Docker Compose
 - PostgreSQL 15+
 
@@ -110,24 +110,20 @@ ergo-type/
 git clone <repository-url>
 cd ergo-type
 
-# Install pnpm (if not already installed)
-npm install -g pnpm
-# or: brew install pnpm
-
 # Install dependencies
-pnpm install
+npm install
 
 # Format code
-pnpm format
+npm run format
 
 # Start development environment
-pnpm dev
+npm run dev
 
 # Run tests
-pnpm test
+npm test
 
 # Run linting
-pnpm lint
+npm run lint
 ```
 
 ## 📋 Development Roadmap
