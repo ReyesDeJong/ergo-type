@@ -9,7 +9,7 @@ This project is designed to teach fullstack software engineering concepts throug
 ### Backend Development
 - **Node.js & Express**: Building RESTful APIs
 - **TypeScript**: Type-safe server-side development
-- **PostgreSQL**: Database design and management
+- **Prisma ORM**: Type-safe database client (using SQLite for local development)
 - **Authentication & Authorization**: User management and security
 - **API Testing**: Comprehensive backend testing with Jest/Supertest
 - **Database Migrations**: Schema management and versioning
@@ -34,7 +34,7 @@ This project is designed to teach fullstack software engineering concepts throug
 ### Backend
 - **Runtime**: Node.js 18+
 - **Framework**: Express.js with TypeScript
-- **Database**: PostgreSQL 15+
+- **Database**: SQLite (local dev) / PostgreSQL (production-ready)
 - **ORM**: Prisma (type-safe database client)
 - **Authentication**: JWT with bcrypt
 - **Testing**: Jest + Supertest
@@ -52,10 +52,10 @@ This project is designed to teach fullstack software engineering concepts throug
 
 ### Development Tools
 - **Package Manager**: npm (workspace support)
-- **Code Formatting**: Prettier (configured)
-- **Linting**: ESLint (to be configured)
+- **Code Formatting**: Prettier (configured with pre-commit hooks)
+- **Linting**: ESLint (configured with pre-commit hooks)
 - **Type Checking**: TypeScript strict mode
-- **Git Hooks**: Husky + lint-staged (to be configured)
+- **Git Hooks**: Husky + lint-staged (configured)
 - **Database**: Docker for local development
 
 ## 📁 Project Structure
@@ -91,8 +91,10 @@ ergo-type/
 ├── .gitignore                   # Git ignore rules
 ├── .prettierrc                  # Prettier configuration
 ├── .prettierignore              # Prettier ignore rules
+├── .husky/                      # Git hooks configuration
+│   └── pre-commit              # Pre-commit hook
+├── eslint.config.mjs            # ESLint configuration
 ├── package.json                 # Root package.json with workspace config
-├── pnpm-workspace.yaml          # pnpm workspace configuration
 └── README.md
 ```
 
@@ -126,13 +128,20 @@ npm test
 npm run lint
 ```
 
+### Pre-commit Hooks
+This project uses Husky and lint-staged to automatically format and lint code before commits:
+- **Prettier**: Formats code for consistent styling
+- **ESLint**: Checks for code quality issues and auto-fixes what it can
+
+The hooks run automatically on staged files when you commit. If there are unfixable linting errors, the commit will be blocked until you fix them.
+
 ## 📋 Development Roadmap
 
 ### Phase 1: Project Setup & Foundation
 - [x] Initialize monorepo structure
 - [x] Set up TypeScript configurations
 - [x] Configure Prettier
-- [ ] Configure ESLint and Husky
+- [x] Configure ESLint and Husky
 - [ ] Set up PostgreSQL with Docker
 - [ ] Initialize Prisma schema
 - [ ] Create basic Express server
@@ -210,6 +219,54 @@ npm run lint
 - Page load times < 2 seconds
 - Lighthouse score > 90
 - 100% test coverage for critical paths
+
+## 🖥️ Example API Usage (Keyboards)
+
+### Create a new keyboard
+```sh
+curl -X POST http://localhost:3001/api/keyboards \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Ergonomic Split Keyboard",
+    "description": "A comfortable split keyboard for long typing sessions",
+    "price": 299.99,
+    "brand": "ErgoType",
+    "layout": "split",
+    "switches": "cherry-mx-brown",
+    "keycaps": "PBT",
+    "wireless": true,
+    "rgb": false,
+    "inStock": true,
+    "stockCount": 10
+  }'
+```
+
+### Get all keyboards
+```sh
+curl http://localhost:3001/api/keyboards
+```
+
+### Get a keyboard by ID
+```sh
+curl http://localhost:3001/api/keyboards/<keyboard_id>
+```
+
+### Update a keyboard
+```sh
+curl -X PUT http://localhost:3001/api/keyboards/<keyboard_id> \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Updated Keyboard Name", "price": 199.99}'
+```
+
+### Delete a keyboard
+```sh
+curl -X DELETE http://localhost:3001/api/keyboards/<keyboard_id>
+```
+
+### Health check
+```sh
+curl http://localhost:3001/health
+```
 
 ## 🤝 Contributing
 
