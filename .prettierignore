@@ -1,0 +1,58 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+.vite/
+
+# Generated files
+*.min.js
+*.min.css
+*.bundle.js
+
+# Package files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Environment files
+.env*
+
+# Documentation
+CHANGELOG.md
+
+# Markdown (optional - you can remove this if you want Prettier to format markdown)
+*.md
+
+# JSON files that should maintain their formatting
+package.json
+tsconfig.json
+.eslintrc.json
+
+# Docker files
+Dockerfile*
+docker-compose*.yml
+
+# Git
+.git/
+.gitignore
+
+# OS files
+.DS_Store
+Thumbs.db
