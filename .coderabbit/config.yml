@@ -1,0 +1,5 @@
+# .coderabbit/config.yml
+rules:
+  - name: general-quality
+    description: Check for code clarity and maintainability
+    enabled: true
