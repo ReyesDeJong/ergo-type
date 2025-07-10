@@ -1,5 +1,5 @@
 output:
-  summary: false
+  summary: true
   walkthrough: false
   poem: false
   tips: false
