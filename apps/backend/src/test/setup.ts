@@ -1,12 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { Keyboard } from '../models';
 
 beforeAll(async () => {
-  // Clean up database before tests
-  await prisma.keyboard.deleteMany();
-});
-
-afterAll(async () => {
-  await prisma.$disconnect();
+  await Keyboard.destroy({ where: {} });
 });

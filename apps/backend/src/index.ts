@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import { keyboardRoutes } from './routes/keyboards';
 import { errorHandler } from './middleware/errorHandler';
+import { initializeDatabase } from './models';
 
 dotenv.config();
 
@@ -33,10 +34,23 @@ app.get('/health', (_req, res) => {
 // Error handling
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(`🚀 Server running on http://localhost:${port}`);
-  console.log(`📊 Health check: http://localhost:${port}/health`);
-  console.log(`⌨️  Keyboards API: http://localhost:${port}/api/keyboards`);
-});
+// Only start the server if this file is run directly
+if (require.main === module) {
+  (async () => {
+    try {
+      await initializeDatabase();
+      app.listen(port, () => {
+        console.log(`🚀 Server running on http://localhost:${port}`);
+        console.log(`📊 Health check: http://localhost:${port}/health`);
+        console.log(
+          `⌨️  Keyboards API: http://localhost:${port}/api/keyboards`
+        );
+      });
+    } catch (error) {
+      console.error('Failed to start server:', error);
+      process.exit(1);
+    }
+  })();
+}
 
 export default app;
