@@ -13,6 +13,23 @@ export default defineConfig([
   },
 
   {
+    files: ["apps/backend/**/*.{js,mjs,cjs,ts,mts,cts}"],
+    ...js.configs.recommended,
+    languageOptions: { globals: globals.node },
+  },
+
+  {
+    files: ["apps/backend/**/*.test.{js,mjs,cjs,ts,mts,cts}", "apps/backend/**/test/**/*.{js,mjs,cjs,ts,mts,cts}"],
+    ...js.configs.recommended,
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.jest
+      }
+    },
+  },
+
+  {
     files: ["**/*.{ts,tsx,mts,cts}"],
     languageOptions: {
       parser: tseslintParser,
