@@ -1,12 +1,19 @@
 import request from 'supertest';
 import app from '../index';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { Keyboard } from '../models';
+import sequelize from '../config/database';
 
 describe('Keyboard API', () => {
+  beforeAll(async () => {
+    await sequelize.sync({ force: true });
+  });
+
+  afterAll(async () => {
+    await sequelize.close();
+  });
+
   beforeEach(async () => {
-    await prisma.keyboard.deleteMany();
+    await Keyboard.destroy({ where: {} });
   });
 
   describe('GET /api/keyboards', () => {
@@ -17,42 +24,35 @@ describe('Keyboard API', () => {
     });
 
     it('should return all keyboards', async () => {
-      const keyboard = await prisma.keyboard.create({
-        data: {
-          name: 'Test Keyboard',
-          price: 199.99,
-          brand: 'Test Brand',
-          layout: 'split',
-        },
+      const keyboard = await Keyboard.create({
+        name: 'Test Keyboard',
       });
+      const keyboardId = keyboard.get('id');
 
       const response = await request(app).get('/api/keyboards');
       expect(response.status).toBe(200);
       expect(response.body).toHaveLength(1);
-      expect(response.body[0].id).toBe(keyboard.id);
+      expect(response.body[0].id).toBe(keyboardId);
+      expect(response.body[0].name).toBe('Test Keyboard');
     });
   });
 
   describe('GET /api/keyboards/:id', () => {
     it('should return 404 for non-existent keyboard', async () => {
-      const response = await request(app).get('/api/keyboards/non-existent-id');
+      const response = await request(app).get('/api/keyboards/999');
       expect(response.status).toBe(404);
       expect(response.body.error).toBe('Keyboard not found');
     });
 
     it('should return keyboard by id', async () => {
-      const keyboard = await prisma.keyboard.create({
-        data: {
-          name: 'Test Keyboard',
-          price: 199.99,
-          brand: 'Test Brand',
-          layout: 'split',
-        },
+      const keyboard = await Keyboard.create({
+        name: 'Test Keyboard',
       });
+      const keyboardId = keyboard.get('id');
 
-      const response = await request(app).get(`/api/keyboards/${keyboard.id}`);
+      const response = await request(app).get(`/api/keyboards/${keyboardId}`);
       expect(response.status).toBe(200);
-      expect(response.body.id).toBe(keyboard.id);
+      expect(response.body.id).toBe(keyboardId);
       expect(response.body.name).toBe('Test Keyboard');
     });
   });
@@ -61,16 +61,6 @@ describe('Keyboard API', () => {
     it('should create a new keyboard', async () => {
       const keyboardData = {
         name: 'Ergonomic Split Keyboard',
-        description: 'A comfortable split keyboard for long typing sessions',
-        price: 299.99,
-        brand: 'ErgoType',
-        layout: 'split',
-        switches: 'cherry-mx-brown',
-        keycaps: 'PBT',
-        wireless: true,
-        rgb: false,
-        inStock: true,
-        stockCount: 10,
       };
 
       const response = await request(app)
@@ -85,8 +75,7 @@ describe('Keyboard API', () => {
 
     it('should return 400 for invalid data', async () => {
       const invalidData = {
-        name: '', // Invalid: empty name
-        price: -10, // Invalid: negative price
+        name: '',
       };
 
       const response = await request(app)
@@ -100,32 +89,26 @@ describe('Keyboard API', () => {
 
   describe('PUT /api/keyboards/:id', () => {
     it('should update keyboard', async () => {
-      const keyboard = await prisma.keyboard.create({
-        data: {
-          name: 'Original Name',
-          price: 199.99,
-          brand: 'Test Brand',
-          layout: 'split',
-        },
+      const keyboard = await Keyboard.create({
+        name: 'Original Name',
       });
+      const keyboardId = keyboard.get('id');
 
       const updateData = {
         name: 'Updated Name',
-        price: 299.99,
       };
 
       const response = await request(app)
-        .put(`/api/keyboards/${keyboard.id}`)
+        .put(`/api/keyboards/${keyboardId}`)
         .send(updateData);
 
       expect(response.status).toBe(200);
       expect(response.body.name).toBe('Updated Name');
-      expect(response.body.price).toBe(299.99);
     });
 
     it('should return 404 for non-existent keyboard', async () => {
       const response = await request(app)
-        .put('/api/keyboards/non-existent-id')
+        .put('/api/keyboards/999')
         .send({ name: 'Updated Name' });
 
       expect(response.status).toBe(404);
@@ -135,31 +118,24 @@ describe('Keyboard API', () => {
 
   describe('DELETE /api/keyboards/:id', () => {
     it('should delete keyboard', async () => {
-      const keyboard = await prisma.keyboard.create({
-        data: {
-          name: 'Test Keyboard',
-          price: 199.99,
-          brand: 'Test Brand',
-          layout: 'split',
-        },
+      const keyboard = await Keyboard.create({
+        name: 'Test Keyboard',
       });
+      const keyboardId = keyboard.get('id');
 
       const response = await request(app).delete(
-        `/api/keyboards/${keyboard.id}`
+        `/api/keyboards/${keyboardId}`
       );
       expect(response.status).toBe(204);
 
-      // Verify it's deleted
       const getResponse = await request(app).get(
-        `/api/keyboards/${keyboard.id}`
+        `/api/keyboards/${keyboardId}`
       );
       expect(getResponse.status).toBe(404);
     });
 
     it('should return 404 for non-existent keyboard', async () => {
-      const response = await request(app).delete(
-        '/api/keyboards/non-existent-id'
-      );
+      const response = await request(app).delete('/api/keyboards/999');
       expect(response.status).toBe(404);
       expect(response.body.error).toBe('Keyboard not found');
     });
