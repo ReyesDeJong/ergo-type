@@ -21,7 +21,12 @@
     "db:init": "tsx -r tsconfig-paths/register src/scripts/init-database.ts",
     "db:sync": "tsx -r tsconfig-paths/register src/scripts/sync-database.ts",
     "db:seed": "tsx -r tsconfig-paths/register src/scripts/seed-database.ts",
-    "db:drop": "tsx -r tsconfig-paths/register src/scripts/drop-database.ts"
+    "db:reset": "tsx -r tsconfig-paths/register src/scripts/reset-database.ts",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:migrate:undo": "sequelize-cli db:migrate:undo",
+    "db:migrate:undo:all": "sequelize-cli db:migrate:undo:all",
+    "db:migrate:status": "sequelize-cli db:migrate:status",
+    "db:create-migration": "node src/scripts/create-migration.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
