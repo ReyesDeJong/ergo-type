@@ -24,10 +24,10 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,json,md,css,scss,html}": [
-      "prettier --write"
+      "prettier --check"
     ],
     "**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+      "eslint"
     ]
   },
   "devDependencies": {
