@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { Sequelize } from 'sequelize';
+import { Sequelize, QueryTypes } from 'sequelize';
 
 async function dropDatabaseHelper(databaseUrl: string) {
   // Extract database name from URL
@@ -20,18 +20,22 @@ async function dropDatabaseHelper(databaseUrl: string) {
     // Drop the database if it exists
     console.log(`🗑️  Dropping database: ${databaseName}`);
     try {
-      await defaultSequelize.query(`DROP DATABASE IF EXISTS "${databaseName}"`);
+      await defaultSequelize.query('DROP DATABASE IF EXISTS :databaseName', {
+        replacements: { databaseName },
+        type: QueryTypes.RAW,
+      });
       console.log(`✅ Database "${databaseName}" dropped successfully`);
     } catch (dropError: unknown) {
-      if (dropError && typeof dropError === 'object' && 'parent' in dropError) {
-        const parent = (dropError as { parent?: { code?: string } }).parent;
-        if (parent?.code === '3D000') {
-          console.log(
-            `ℹ️  Database "${databaseName}" doesn't exist, nothing to drop`
-          );
-        } else {
-          throw dropError;
-        }
+      const isPostgresError = (
+        err: unknown
+      ): err is { parent?: { code?: string } } => {
+        return Boolean(err && typeof err === 'object' && 'parent' in err);
+      };
+
+      if (isPostgresError(dropError) && dropError.parent?.code === '3D000') {
+        console.log(
+          `ℹ️  Database "${databaseName}" doesn't exist, nothing to drop`
+        );
       } else {
         throw dropError;
       }

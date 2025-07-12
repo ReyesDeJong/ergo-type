@@ -42,7 +42,7 @@ src/
 
 2. **Environment Configuration**
    ```bash
-   cp env.example .env
+   cp .env.example .env
    ```
 
 3. **Configure your `.env` file**

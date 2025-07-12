@@ -24,6 +24,15 @@ Keyboard.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Name cannot be empty',
+        },
+        len: {
+          args: [1, 255],
+          msg: 'Name must be between 1 and 255 characters',
+        },
+      },
     },
   },
   {
