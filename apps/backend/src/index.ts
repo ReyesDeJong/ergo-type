@@ -43,7 +43,7 @@ if (require.main === module) {
         console.log(`🚀 Server running on http://localhost:${port}`);
         console.log(`📊 Health check: http://localhost:${port}/health`);
         console.log(
-          `⌨️  Keyboards API: http://localhost:${port}/api/keyboards`
+          `📊 API endpoints available at http://localhost:${port}/api/`
         );
       });
     } catch (error) {
