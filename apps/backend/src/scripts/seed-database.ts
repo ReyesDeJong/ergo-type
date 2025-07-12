@@ -17,7 +17,14 @@ async function seedDatabase() {
   try {
     console.log('🔄 Seeding database...');
     await initializeDatabase();
-    await Keyboard.destroy({ where: {} });
+
+    if (process.env['NODE_ENV'] === 'development') {
+      await Keyboard.destroy({ where: {} });
+    } else {
+      console.log('⚠️  Skipping data destruction in production environment');
+      process.exit(0);
+    }
+
     const createdKeyboards = await Keyboard.bulkCreate(sampleKeyboards);
 
     console.log(
