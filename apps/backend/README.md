@@ -68,6 +68,9 @@ src/
    # Set up development database (creates database if it doesn't exist)
    npm run db:setup
 
+   # Sync development database (creates tables if they don't exist)
+   npm run db:sync
+
    # Drop database (removes database completely)
    npm run db:drop
 
