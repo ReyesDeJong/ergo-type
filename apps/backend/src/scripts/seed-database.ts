@@ -21,7 +21,9 @@ async function seedDatabase() {
     if (process.env['NODE_ENV'] === 'development') {
       await Keyboard.destroy({ where: {} });
     } else {
-      console.log('⚠️  Skipping data destruction in production environment');
+      console.log(
+        `⚠️  Aborting seeding process in ${process.env['NODE_ENV']} environment`
+      );
       process.exit(0);
     }
 

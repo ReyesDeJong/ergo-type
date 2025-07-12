@@ -66,9 +66,6 @@ async function createDatabaseIfNotExists(
 }
 
 async function setupDevDatabase() {
-  // Set NODE_ENV to development to ensure we use the development database
-  process.env['NODE_ENV'] = 'development';
-
   try {
     console.log('🔄 Setting up development database...');
 
