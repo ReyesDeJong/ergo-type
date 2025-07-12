@@ -1,15 +1,16 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 export interface AppError extends Error {
   statusCode?: number;
 }
 
 export const errorHandler = (
-  _error: AppError,
+  error: AppError,
   _req: Request,
-  res: Response
+  res: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _next: NextFunction
 ) => {
-  const error = _error;
   console.error('Error:', error);
 
   const statusCode = error.statusCode || 500;
