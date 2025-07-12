@@ -65,8 +65,8 @@ src/
 
 4. **Database Setup**
    ```bash
-   # Set up development database (creates database if it doesn't exist)
-   npm run db:setup
+   # Initialize development database (creates database if it doesn't exist)
+   npm run db:init
 
    # Sync development database (creates tables if they don't exist)
    npm run db:sync
