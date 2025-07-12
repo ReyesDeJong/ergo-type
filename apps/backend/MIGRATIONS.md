@@ -9,17 +9,13 @@ This project uses Sequelize migrations to manage database schema changes.
 - `npm run db:migrate:undo` - Undo the last migration
 - `npm run db:migrate:undo:all` - Undo all migrations
 - `npm run db:migrate:status` - Check migration status
-- `npm run db:create-migration <name>` - Create a new migration file
-
-### Seeder Commands
-- `npm run db:seed:all` - Run all seeders
-- `npm run db:seed:undo:all` - Undo all seeders
+- `npm run db:create-migration -- --name <name>` - Create a new migration file
 
 ## Creating a New Migration
 
 1. Generate a new migration:
    ```bash
-   npm run db:create-migration add-user-table
+   npm run db:create-migration -- --name add-user-table
    ```
 
 2. Edit the generated migration file in `src/migrations/`
@@ -61,6 +57,5 @@ module.exports = {
 ## Environment Configuration
 
 The migrations use the same database configuration as your application:
-- Development: `DATABASE_URL` environment variable
-- Test: `TEST_DATABASE_URL` or `DATABASE_URL`
-- Production: `DATABASE_URL` with SSL enabled
+- Development: `DATABASE_URL`
+- Test: `TEST_DATABASE_URL`

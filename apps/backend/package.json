@@ -26,7 +26,7 @@
     "db:migrate:undo": "sequelize-cli db:migrate:undo",
     "db:migrate:undo:all": "sequelize-cli db:migrate:undo:all",
     "db:migrate:status": "sequelize-cli db:migrate:status",
-    "db:create-migration": "node src/scripts/create-migration.js"
+    "db:create-migration": "sequelize-cli migration:generate"
   },
   "dependencies": {
     "cors": "^2.8.5",

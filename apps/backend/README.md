@@ -207,6 +207,18 @@ npm run db:seed       # Seed database with sample data
 npm run db:drop       # Drop database (removes database completely)
 ```
 
+### Database Migrations
+
+See [MIGRATIONS.md](MIGRATIONS.md) for more information.
+
+```bash
+npm run db:migrate       # Run all pending migrations
+npm run db:migrate:undo  # Undo the last migration
+npm run db:migrate:undo:all  # Undo all migrations
+npm run db:migrate:status  # Check migration status
+npm run db:create-migration  # Create a new migration file
+```
+
 ## 🔒 Security Features
 
 ### Input Validation
