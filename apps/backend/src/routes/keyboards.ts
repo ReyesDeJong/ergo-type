@@ -33,7 +33,7 @@ router.get('/:id', async (req, res, next) => {
     const { id } = req.params;
 
     if (!isValidId(id)) {
-      return res.status(404).json({ error: 'Keyboard not found' });
+      return res.status(400).json({ error: 'Invalid keyboard ID' });
     }
 
     const keyboard = await Keyboard.findByPk(parseInt(id, 10));
