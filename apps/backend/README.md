@@ -201,12 +201,10 @@ npm run format:check  # Check code formatting
 
 ### Database Management
 ```bash
-npm run db:setup      # Set up development database (creates if needed)
+npm run db:init       # Initialize development database (creates if needed)
 npm run db:sync       # Sync database schema
 npm run db:seed       # Seed database with sample data
 npm run db:drop       # Drop database (removes database completely)
-npm run db:generate   # Generate new migration
-npm run db:migrate    # Run pending migrations
 ```
 
 ## 🔒 Security Features
@@ -277,7 +275,7 @@ The API uses a centralized error handling middleware that:
 |----------|-------------|---------|----------|
 | `DATABASE_URL` | PostgreSQL connection URL | - | ✅ |
 | `TEST_DATABASE_URL` | Test database connection URL | DATABASE_URL | ❌ |
-| `PORT` | Server port | 3000 | ❌ |
+| `PORT` | Server port | 3001 | ❌ |
 | `NODE_ENV` | Environment | development | ❌ |
 | `CORS_ORIGIN` | CORS origin | http://localhost:3000 | ❌ |
 

@@ -69,7 +69,7 @@ cd ergo-type
 npm install
 
 # Set up environment variables
-cp apps/backend/env.example apps/backend/.env
+cp apps/backend/.env.example apps/backend/.env
 # Edit apps/backend/.env with your database credentials
 
 # Start the backend development server
