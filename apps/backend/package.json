@@ -11,6 +11,7 @@
     "test:watch": "NODE_ENV=test jest --watch",
     "test:coverage": "NODE_ENV=test jest --coverage",
     "test:init-and-sync-db": "NODE_ENV=test tsx -r tsconfig-paths/register src/scripts/init-and-sync-test-database.ts",
+    "test:drop-db": "NODE_ENV=test tsx -r tsconfig-paths/register src/scripts/drop-test-database.ts",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
     "format": "prettier --write \"src/**/*.{ts,json}\"",
@@ -20,7 +21,7 @@
     "db:init": "tsx -r tsconfig-paths/register src/scripts/init-database.ts",
     "db:sync": "tsx -r tsconfig-paths/register src/scripts/sync-database.ts",
     "db:seed": "tsx -r tsconfig-paths/register src/scripts/seed-database.ts",
-    "db:drop": "tsx -r tsconfig-paths/register src/scripts/drop-database.ts",
+    "db:drop": "tsx -r tsconfig-paths/register src/scripts/drop-database.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
