@@ -47,12 +47,11 @@ async function dropDatabaseHelper(databaseUrl: string) {
 async function dropDatabase() {
   // Check environment before performing destructive operations
   if (process.env['NODE_ENV'] !== 'development') {
-    console.log('⚠️  Skipping database drop in non-development environment');
+    console.log(
+      `⚠️  Aborting database drop in ${process.env['NODE_ENV']} environment`
+    );
     process.exit(0);
   }
-
-  // Set NODE_ENV to development to ensure we use the development database
-  process.env['NODE_ENV'] = 'development';
 
   try {
     console.log('🔄 Dropping development database...');

@@ -44,14 +44,12 @@ async function createDatabaseIfNotExists(databaseUrl: string) {
 }
 
 async function setupTestDatabase() {
-  // Set NODE_ENV to test to ensure we use the test database
   process.env['NODE_ENV'] = 'test';
 
   try {
     console.log('🔄 Setting up test database...');
 
-    const databaseUrl =
-      process.env['TEST_DATABASE_URL'] || process.env['DATABASE_URL'];
+    const databaseUrl = process.env['TEST_DATABASE_URL'];
     if (!databaseUrl) {
       throw new Error(
         'No database URL found. Please set TEST_DATABASE_URL or DATABASE_URL'
