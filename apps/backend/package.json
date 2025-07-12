@@ -17,9 +17,12 @@
     "format:check": "prettier --check \"src/**/*.{ts,json}\"",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf dist",
+    "db:setup": "tsx -r tsconfig-paths/register src/scripts/setup-dev-db.ts",
     "db:sync": "tsx -r tsconfig-paths/register src/scripts/sync-database.ts",
     "db:seed": "tsx -r tsconfig-paths/register src/scripts/seed-database.ts",
-    "db:reset": "tsx -r tsconfig-paths/register src/scripts/reset-database.ts"
+    "db:drop": "tsx -r tsconfig-paths/register src/scripts/drop-database.ts",
+    "db:generate": "tsx -r tsconfig-paths/register src/scripts/generate-migration.ts",
+    "db:migrate": "tsx -r tsconfig-paths/register src/scripts/run-migrations.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
