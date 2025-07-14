@@ -4,6 +4,7 @@ node_modules/
 
 # Production builds
 dist/
+dist-ssr/
 build/
 .next/
 out/
@@ -88,9 +89,15 @@ temp/
 
 # Editor directories and files
 .vscode/
+!.vscode/extensions.json
 .idea/
 *.swp
 *.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 *~
 
 # OS generated files
