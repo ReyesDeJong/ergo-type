@@ -3,13 +3,14 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
+  js.configs.recommended,
+  tseslint.configs.recommended,
   {
     ignores: ['dist/**', 'node_modules/**', 'coverage/**'],
   },
   // JavaScript files (migrations, seeders, config files)
   {
     files: ['**/*.js', 'migrations/**/*.js', 'seeders/**/*.js'],
-    extends: [js.configs.recommended],
     languageOptions: {
       sourceType: 'commonjs',
       ecmaVersion: 2022,
@@ -25,7 +26,6 @@ export default tseslint.config(
   // TypeScript files
   {
     files: ['**/*.{ts,mts,cts}'],
-    extends: [js.configs.recommended, tseslint.configs.recommended],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',

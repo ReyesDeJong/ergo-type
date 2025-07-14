@@ -20,10 +20,10 @@
   },
   "lint-staged": {
     "apps/backend/**/*.{js,ts}": [
-      "cd apps/backend && eslint --fix"
+      "eslint --fix"
     ],
     "apps/frontend/**/*.{js,jsx,ts,tsx}": [
-      "cd apps/frontend && eslint --fix"
+      "eslint --fix"
     ],
     "**/*.{js,jsx,ts,tsx,json,md,css,scss,html}": [
       "prettier --write"
