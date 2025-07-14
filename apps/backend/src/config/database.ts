@@ -3,10 +3,16 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const databaseUrl = process.env['DATABASE_URL'];
+// Use TEST_DATABASE_URL for test environment, DATABASE_URL for others
+const databaseUrl =
+  process.env['NODE_ENV'] === 'test'
+    ? process.env['TEST_DATABASE_URL']
+    : process.env['DATABASE_URL'];
+
 if (!databaseUrl) {
   throw new Error(
-    `DATABASE_URL environment variable is required for ${process.env['NODE_ENV']} environment`
+    `Database URL environment variable is required for ${process.env['NODE_ENV']} environment. ` +
+      `Please set ${process.env['NODE_ENV'] === 'test' ? 'TEST_DATABASE_URL' : 'DATABASE_URL'}`
   );
 }
 
