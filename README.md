@@ -23,7 +23,15 @@ ergo-type/
 │   │   │   └── test/            # Backend tests
 │   │   ├── package.json         # Backend-specific dependencies
 │   │   └── tsconfig.json        # TypeScript configuration
-│   └── frontend/                # React frontend (Planned)
+│   └── frontend/                # React frontend (Active)
+│       ├── src/
+│       │   ├── components/      # Reusable UI components
+│       │   ├── pages/           # Page components
+│       │   ├── services/        # API services
+│       │   ├── types/           # TypeScript type definitions
+│       │   └── test/            # Frontend tests
+│       ├── package.json         # Frontend-specific dependencies
+│       └── vite.config.ts       # Vite configuration
 ├── package.json                 # Root workspace configuration
 ├── eslint.config.mjs            # Global ESLint configuration
 ├── .prettierrc                  # Global Prettier configuration
@@ -40,17 +48,19 @@ ergo-type/
 - **Testing**: Jest + Supertest
 - **Security**: Helmet, CORS, Morgan logging
 
+### Frontend (Active)
+- **Framework**: React 19 with TypeScript
+- **Build Tool**: Vite
+- **Routing**: React Router DOM
+- **Testing**: Vitest + React Testing Library
+- **Styling**: CSS with responsive design
+- **Code Quality**: ESLint + Prettier
+
 ### Development Tools
 - **Package Manager**: npm with workspace support
 - **Code Quality**: ESLint + Prettier with pre-commit hooks
 - **Git Hooks**: Husky + lint-staged
 - **Type Checking**: TypeScript strict mode
-
-### Planned Frontend
-- **Framework**: React 18 with TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **State Management**: React Context + Zustand
 
 ## 🚀 Quick Start
 
@@ -58,6 +68,15 @@ ergo-type/
 - Node.js 18+
 - PostgreSQL 15+
 - npm
+
+### Frontend Features
+- **Modern React 19**: Latest React features with TypeScript
+- **Fast Development**: Vite for instant hot module replacement
+- **Client-side Routing**: React Router for seamless navigation
+- **Responsive Design**: Mobile-first approach with CSS Grid
+- **Component Testing**: Comprehensive testing with Vitest and React Testing Library
+- **Keyboard Preview**: Interactive keyboard visualization
+- **Type Safety**: Full TypeScript integration for better development experience
 
 ### Installation
 ```bash
@@ -74,6 +93,10 @@ cp apps/backend/.env.example apps/backend/.env
 
 # Start the backend development server
 cd apps/backend
+npm run dev
+
+# In a new terminal, start the frontend development server
+cd apps/frontend
 npm run dev
 ```
 
@@ -117,6 +140,12 @@ The hooks run automatically on staged files when you commit. If there are unfixa
 - [x] Basic testing setup
 - [x] Code quality tools (ESLint, Prettier, Husky)
 - [x] Database management scripts
+- [x] React frontend with TypeScript
+- [x] Vite build system and development server
+- [x] React Router for client-side routing
+- [x] Component testing with Vitest and React Testing Library
+- [x] Responsive design with CSS
+- [x] Keyboard preview functionality
 
 ### 🚧 In Progress
 - [ ] Comprehensive test coverage
@@ -124,13 +153,14 @@ The hooks run automatically on staged files when you commit. If there are unfixa
 - [ ] User authentication system
 
 ### 📅 Planned
-- [ ] React frontend application
 - [ ] User management and authentication
 - [ ] Shopping cart functionality
 - [ ] Admin dashboard
 - [ ] Image upload for keyboards
 - [ ] Search and filtering
 - [ ] E2E testing
+- [ ] Advanced keyboard customization features
+- [ ] User reviews and ratings
 
 ## 🤝 Contributing
 
@@ -143,11 +173,19 @@ This is a learning project, but contributions are welcome! Please follow the est
 
 ## 📚 Learning Resources
 
+### Backend
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [Express.js Guide](https://expressjs.com/en/guide/routing.html)
 - [Sequelize Documentation](https://sequelize.org/docs/v6/)
 - [Jest Testing Framework](https://jestjs.io/docs/getting-started)
 - [Zod Validation](https://zod.dev/)
+
+### Frontend
+- [React Documentation](https://react.dev/)
+- [Vite Guide](https://vitejs.dev/guide/)
+- [React Router Documentation](https://reactrouter.com/)
+- [Vitest Testing Framework](https://vitest.dev/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
 ## 📝 License
 
@@ -155,4 +193,6 @@ This project is for educational purposes.
 
 ---
 
-For detailed backend documentation, see [apps/backend/README.md](./apps/backend/README.md).
+For detailed documentation:
+- Backend: [apps/backend/README.md](./apps/backend/README.md)
+- Frontend: [apps/frontend/README.md](./apps/frontend/README.md)
