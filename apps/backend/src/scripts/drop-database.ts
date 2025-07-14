@@ -6,6 +6,13 @@ async function dropDatabaseHelper(databaseUrl: string) {
   const url = new URL(databaseUrl);
   const databaseName = url.pathname.slice(1); // Remove leading slash
 
+  // Validate database name to prevent SQL injection
+  if (!/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(databaseName)) {
+    throw new Error(
+      `Invalid database name: ${databaseName}. Only alphanumeric characters and underscores are allowed.`
+    );
+  }
+
   // Connect to default postgres database to drop our development database
   const defaultUrl = databaseUrl.replace(`/${databaseName}`, '/postgres');
   const defaultSequelize = new Sequelize(defaultUrl, {
@@ -20,8 +27,7 @@ async function dropDatabaseHelper(databaseUrl: string) {
     // Drop the database if it exists
     console.log(`🗑️  Dropping database: ${databaseName}`);
     try {
-      await defaultSequelize.query('DROP DATABASE IF EXISTS :databaseName', {
-        replacements: { databaseName },
+      await defaultSequelize.query(`DROP DATABASE IF EXISTS ${databaseName}`, {
         type: QueryTypes.RAW,
       });
       console.log(`✅ Database "${databaseName}" dropped successfully`);
