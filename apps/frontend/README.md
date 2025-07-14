@@ -65,17 +65,9 @@ npm run format
 ```
 src/
 ├── components/          # Reusable UI components
-│   ├── KeyboardCard.tsx
-│   └── KeyboardCard.css
 ├── pages/              # Page components
-│   ├── HomePage.tsx
-│   ├── HomePage.css
-│   ├── KeyboardPreviewPage.tsx
-│   └── KeyboardPreviewPage.css
 ├── services/           # API services
-│   └── keyboardService.ts
 ├── types/              # TypeScript type definitions
-│   └── keyboard.ts
 ├── test/               # Test setup
 │   └── setup.ts
 └── App.tsx             # Main application component
@@ -83,12 +75,7 @@ src/
 
 ## API Integration
 
-The frontend connects to the backend API at `http://localhost:3000/api`. Make sure the backend is running before starting the frontend.
-
-### Available Endpoints
-
-- `GET /api/keyboards` - Get all keyboards
-- `GET /api/keyboards/:id` - Get keyboard by ID
+The frontend connects to the backend API defined in the `.env` file. Make sure the backend is running before starting the frontend.
 
 ## Technologies Used
 

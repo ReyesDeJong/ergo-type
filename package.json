@@ -4,7 +4,7 @@
   "description": "A fullstack TypeScript project for learning modern web development by building a split keyboard web store",
   "private": true,
   "workspaces": [
-    "apps/backend/*",
+    "apps/backend",
     "apps/frontend"
   ],
   "scripts": {
