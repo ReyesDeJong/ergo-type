@@ -11,6 +11,16 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Theme-aware color variables */
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --background-primary: #ffffff;
+  --background-secondary: #f8f9fa;
+  --border-color: #e9ecef;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --link-color: #3498db;
+  --link-hover-color: #2980b9;
 }
 
 a {
@@ -58,11 +68,35 @@ button:focus-visible {
   :root {
     color: #213547;
     background-color: #ffffff;
+
+    /* Light theme colors */
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --background-primary: #ffffff;
+    --background-secondary: #f8f9fa;
+    --border-color: #e9ecef;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --link-color: #3498db;
+    --link-hover-color: #2980b9;
   }
   a:hover {
     color: #747bff;
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+/* Dark theme colors */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-primary: #e2e8f0;
+    --text-secondary: #a0aec0;
+    --background-primary: #1a202c;
+    --background-secondary: #2d3748;
+    --border-color: #4a5568;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --link-color: #63b3ed;
+    --link-hover-color: #4299e1;
   }
 }

@@ -1,13 +1,13 @@
 .keyboard-card {
-  background: white;
+  background: var(--background-primary);
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px var(--shadow-color);
   overflow: hidden;
   transition: box-shadow 0.2s ease-in-out;
 }
 
 .keyboard-card:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px var(--shadow-color);
 }
 
 .keyboard-card-content {
@@ -17,13 +17,13 @@
 .keyboard-name {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--text-primary);
   margin-bottom: 1rem;
   text-align: center;
 }
 
 .keyboard-placeholder {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
   height: 200px;
   border-radius: 8px;
   display: flex;

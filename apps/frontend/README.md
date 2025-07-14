@@ -6,7 +6,7 @@ A modern React TypeScript frontend for the Ergo Type keyboard store.
 
 - **Vite + React + TypeScript**: Fast development with modern tooling
 - **React Router**: Client-side routing with nested routes
-- **Testing**: Jest + React Testing Library for component testing
+- **Testing**: Vitest + React Testing Library for component testing
 - **ESLint + Prettier**: Code quality and formatting
 - **Responsive Design**: Mobile-first approach with CSS Grid
 
@@ -22,6 +22,16 @@ A modern React TypeScript frontend for the Ergo Type keyboard store.
 ```bash
 npm install
 ```
+
+### Environment Setup
+
+Copy the environment example file and configure your settings:
+
+```bash
+cp .env.example .env
+```
+
+Edit the `.env` file with your specific configuration values.
 
 ### Development
 
@@ -55,9 +65,6 @@ npm run test:coverage
 ```bash
 # Lint code
 npm run lint
-
-# Format code
-npm run format
 ```
 
 ## Project Structure
