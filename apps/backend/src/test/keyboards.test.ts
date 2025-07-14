@@ -1,17 +1,9 @@
 import request from 'supertest';
+import { describe, it, expect, beforeEach } from '@jest/globals';
 import app from '../index';
 import { Keyboard } from '../models';
-import sequelize from '../config/database';
 
 describe('Keyboard API', () => {
-  beforeAll(async () => {
-    await sequelize.sync({ force: true });
-  });
-
-  afterAll(async () => {
-    await sequelize.close();
-  });
-
   beforeEach(async () => {
     await Keyboard.destroy({ where: {} });
   });
