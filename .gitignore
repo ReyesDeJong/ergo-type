@@ -5,6 +5,7 @@ node_modules/
 # Production builds
 dist/
 dist-ssr/
+*.local
 build/
 .next/
 out/
@@ -18,6 +19,7 @@ out/
 
 # Logs
 logs/
+logs
 *.log
 npm-debug.log*
 yarn-debug.log*
