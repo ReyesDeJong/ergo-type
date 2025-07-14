@@ -4,21 +4,29 @@
   "description": "A fullstack TypeScript project for learning modern web development by building a split keyboard web store",
   "private": true,
   "workspaces": [
-    "apps/backend/*"
+    "apps/backend/*",
+    "apps/frontend"
   ],
   "scripts": {
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:fix": "npm run lint:fix:backend && npm run lint:fix:frontend",
+    "lint:backend": "cd apps/backend && eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:frontend": "cd apps/frontend && eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix:backend": "cd apps/backend && eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "lint:fix:frontend": "cd apps/frontend && eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,json,md,css,scss,html}": [
-      "prettier --check"
+    "apps/backend/**/*.{js,ts}": [
+      "cd apps/backend && eslint --fix"
     ],
-    "**/*.{js,jsx,ts,tsx}": [
-      "eslint"
+    "apps/frontend/**/*.{js,jsx,ts,tsx}": [
+      "cd apps/frontend && eslint --fix"
+    ],
+    "**/*.{js,jsx,ts,tsx,json,md,css,scss,html}": [
+      "prettier --write"
     ]
   },
   "devDependencies": {
