@@ -1,68 +1,90 @@
-import js from "@eslint/js";
-import globals from "globals";
-import tseslint from "@typescript-eslint/eslint-plugin";
-import tseslintParser from "@typescript-eslint/parser";
-import pluginReact from "eslint-plugin-react";
-import { defineConfig } from "eslint/config";
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
 
-export default defineConfig([
+export default [
   {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
-    ...js.configs.recommended,
-    languageOptions: { globals: globals.browser },
+    ignores: ['**/dist/**', '**/node_modules/**', '**/coverage/**', '**/build/**'],
   },
-
+  // Default config for files not covered by app-specific configs
   {
-    files: ["apps/backend/**/*.{js,mjs,cjs,ts,mts,cts}"],
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     ...js.configs.recommended,
-    languageOptions: { globals: globals.node },
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+    },
   },
-
+  ...tseslint.configs.recommended,
+  // Backend-specific overrides
   {
-    files: ["apps/backend/**/*.test.{js,mjs,cjs,ts,mts,cts}", "apps/backend/**/test/**/*.{js,mjs,cjs,ts,mts,cts}"],
-    ...js.configs.recommended,
+    files: ['apps/backend/**/*.{js,ts}'],
     languageOptions: {
       globals: {
-        ...globals.node,
-        ...globals.jest
-      }
-    },
-  },
-
-  {
-    files: ["**/*.{ts,tsx,mts,cts}"],
-    languageOptions: {
-      parser: tseslintParser,
-      parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
-        ecmaFeatures: {
-          jsx: true,
-        },
+        require: 'readonly',
+        module: 'readonly',
+        process: 'readonly',
+        console: 'readonly',
       },
     },
-    plugins: {
-      "@typescript-eslint": tseslint,
-    },
-    rules: {
-      ...tseslint.configs.recommended.rules,
-    },
   },
-
   {
-    files: ["**/*.{jsx,tsx}"],
-    plugins: {
-      react: pluginReact,
-    },
+    files: ['apps/backend/**/*.js', 'apps/backend/migrations/**/*.js', 'apps/backend/seeders/**/*.js'],
     languageOptions: {
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
+      sourceType: 'commonjs',
+      globals: {
+        require: 'readonly',
+        module: 'readonly',
+        process: 'readonly',
+        console: 'readonly',
       },
     },
-    rules: {
-      ...pluginReact.configs.recommended.rules,
+  },
+  {
+    files: ['apps/backend/**/*.test.{js,ts}', 'apps/backend/test/**/*.{js,ts}'],
+    languageOptions: {
+      globals: {
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        require: 'readonly',
+        module: 'readonly',
+        process: 'readonly',
+        console: 'readonly',
+      },
     },
   },
-]);
+  // Frontend-specific overrides
+  {
+    files: ['apps/frontend/**/*.{ts,tsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      sourceType: 'module',
+      globals: {
+        React: 'readonly',
+        JSX: 'readonly',
+      },
+    },
+  },
+  {
+    files: ['apps/frontend/**/*.test.{ts,tsx}', 'apps/frontend/test/**/*.{ts,tsx}'],
+    languageOptions: {
+      globals: {
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        React: 'readonly',
+        JSX: 'readonly',
+      },
+    },
+  },
+];
