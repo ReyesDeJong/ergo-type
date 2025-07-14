@@ -16,7 +16,7 @@ const port = process.env['PORT'];
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env['CORS_ORIGIN'] || 'http://localhost:5173',
+    origin: process.env['CORS_ORIGIN'],
     credentials: true,
   })
 );
