@@ -4,7 +4,8 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import { keyboardRoutes } from './routes/keyboards';
-import { authRoutes } from './routes/auth';
+import { authSignupRoutes } from './routes/authSignup';
+import { loginRoutes } from './routes/authLogin';
 import { errorHandler } from './middleware/errorHandler';
 import { initializeDatabase } from './models';
 
@@ -26,7 +27,8 @@ app.use(express.json());
 
 // Routes
 app.use('/api/keyboards', keyboardRoutes);
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', authSignupRoutes);
+app.use('/api/auth', loginRoutes);
 
 // Health check
 app.get('/health', (_req, res) => {

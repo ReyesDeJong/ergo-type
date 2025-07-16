@@ -1,5 +1,5 @@
-import sequelize from '../config/database';
 import { beforeAll, afterAll } from '@jest/globals';
+import sequelize from '../config/database';
 
 beforeAll(async () => {
   if (process.env['NODE_ENV'] !== 'test') {
@@ -13,21 +13,12 @@ beforeAll(async () => {
     );
   }
 
-  try {
-    // First authenticate the connection
-    await sequelize.authenticate();
-    console.log('✅ Test database connection established');
-
-    // Then sync the schema (create tables)
-    await sequelize.sync({ force: true });
-    console.log('✅ Test database schema synced');
-  } catch (error) {
-    console.error('❌ Test database setup failed:', error);
-    throw error;
-  }
+  console.log('✅ Test environment configured');
+  console.log('📊 Using test database:', process.env['TEST_DATABASE_URL']);
 });
 
 afterAll(async () => {
-  // Clean up and close the database connection
+  // Close the database connection to prevent Jest from hanging
   await sequelize.close();
+  console.log('🔌 Database connection closed');
 });
