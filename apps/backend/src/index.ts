@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import { keyboardRoutes } from './routes/keyboards';
+import { authRoutes } from './routes/auth';
 import { errorHandler } from './middleware/errorHandler';
 import { initializeDatabase } from './models';
 
@@ -25,6 +26,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/keyboards', keyboardRoutes);
+app.use('/api/auth', authRoutes);
 
 // Health check
 app.get('/health', (_req, res) => {
@@ -42,9 +44,6 @@ if (require.main === module) {
       app.listen(port, () => {
         console.log(`🚀 Server running on http://localhost:${port}`);
         console.log(`📊 Health check: http://localhost:${port}/health`);
-        console.log(
-          `📊 API endpoints available at http://localhost:${port}/api/`
-        );
       });
     } catch (error) {
       console.error('Failed to start server:', error);
