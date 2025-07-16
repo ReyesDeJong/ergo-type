@@ -17,8 +17,9 @@ src/
 │   └── [resource].ts    # CRUD endpoints
 ├── scripts/             # Database management scripts
 │   ├── drop-database.ts     # Drop database (removes database completely)
-│   ├── setup-test-db.ts     # Test database setup
-│   └── sync-database.ts     # Sync database schema
+│   ├── init-database.ts     # Initialize database
+│   ├── init-test-database.ts     # Initialize test database
+│   ├── drop-test-database.ts     # Drop test database
 ├── seeders/             # Database seeders
 │   └── [timestamp]-[name].ts # Seeder files for sample data
 ├── test/                # Backend tests
@@ -71,8 +72,8 @@ src/
    # Initialize development database (creates database if it doesn't exist)
    npm run db:init
 
-   # Sync development database (creates tables if they don't exist)
-   npm run db:sync
+   # migrate database
+   npm run db:migrate
 
    # Drop database (removes database completely)
    npm run db:drop
@@ -212,7 +213,6 @@ npm run format:check  # Check code formatting
 ### Database Management
 ```bash
 npm run db:init       # Initialize development database (creates if needed)
-npm run db:sync       # Sync database schema
 npm run db:seed       # Seed database with sample data
 npm run db:drop       # Drop database (removes database completely)
 ```

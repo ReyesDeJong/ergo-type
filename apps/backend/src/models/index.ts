@@ -1,5 +1,6 @@
 import sequelize from '../config/database';
 import Keyboard from './Keyboard';
+import User from './User';
 
 export const initializeDatabase = async () => {
   try {
@@ -11,5 +12,5 @@ export const initializeDatabase = async () => {
   }
 };
 
-export { Keyboard };
+export { Keyboard, User };
 export default sequelize;
