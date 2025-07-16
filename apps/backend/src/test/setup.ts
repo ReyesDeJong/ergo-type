@@ -13,8 +13,18 @@ beforeAll(async () => {
     );
   }
 
-  // Sync the test database schema
-  await sequelize.sync({ force: true });
+  try {
+    // First authenticate the connection
+    await sequelize.authenticate();
+    console.log('✅ Test database connection established');
+
+    // Then sync the schema (create tables)
+    await sequelize.sync({ force: true });
+    console.log('✅ Test database schema synced');
+  } catch (error) {
+    console.error('❌ Test database setup failed:', error);
+    throw error;
+  }
 });
 
 afterAll(async () => {

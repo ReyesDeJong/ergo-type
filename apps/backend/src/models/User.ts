@@ -44,8 +44,8 @@ User.init(
           msg: 'Password cannot be empty',
         },
         len: {
-          args: [6, 255],
-          msg: 'Password must be between 6 and 255 characters',
+          args: [8, 255],
+          msg: 'Password must be between 8 and 255 characters',
         },
       },
     },
