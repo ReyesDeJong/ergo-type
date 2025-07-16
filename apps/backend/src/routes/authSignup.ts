@@ -3,7 +3,7 @@ import { z } from 'zod';
 import bcrypt from 'bcrypt';
 import { User } from '../models';
 
-const authRoutes = Router();
+const authSignupRoutes = Router();
 
 const signupSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -27,7 +27,7 @@ const getFieldErrorMessage = (field: string, message: string): string => {
 };
 
 // POST /api/auth/signup - Create new user account
-authRoutes.post('/signup', async (req, res, next) => {
+authSignupRoutes.post('/signup', async (req, res, next) => {
   try {
     const validatedData = signupSchema.parse(req.body);
     const { email, password } = validatedData;
@@ -82,4 +82,4 @@ authRoutes.post('/signup', async (req, res, next) => {
   }
 });
 
-export { authRoutes };
+export { authSignupRoutes };

@@ -1,19 +1,10 @@
 import request from 'supertest';
 import app from '../../index';
 import { User } from '../../models';
-import sequelize from '../../config/database';
 
 describe('Auth Routes', () => {
-  beforeAll(async () => {
-    await sequelize.sync({ force: true });
-  });
-
   afterEach(async () => {
     await User.destroy({ where: {} });
-  });
-
-  afterAll(async () => {
-    await sequelize.close();
   });
 
   describe('POST /api/auth/signup', () => {

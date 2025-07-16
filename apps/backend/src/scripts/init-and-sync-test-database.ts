@@ -1,5 +1,8 @@
 import { Sequelize } from 'sequelize';
-import { initializeDatabase } from '../models';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 async function createDatabaseIfNotExists(databaseUrl: string) {
   // Extract database name from URL
@@ -35,7 +38,20 @@ async function createDatabaseIfNotExists(databaseUrl: string) {
     } else {
       console.log(`✅ Database "${databaseName}" already exists`);
     }
-  } catch (error) {
+  } catch (error: unknown) {
+    // If the error is that the database already exists, that's fine
+    if (
+      error &&
+      typeof error === 'object' &&
+      'code' in error &&
+      'message' in error &&
+      error.code === '42P04' &&
+      typeof error.message === 'string' &&
+      error.message.includes('already exists')
+    ) {
+      console.log(`✅ Database "${databaseName}" already exists`);
+      return;
+    }
     console.error('❌ Error checking/creating database:', error);
     throw error;
   } finally {
@@ -61,11 +77,13 @@ async function setupTestDatabase() {
     // Create database if it doesn't exist
     await createDatabaseIfNotExists(databaseUrl);
 
-    // Initialize the database with models and create tables
-    await initializeDatabase();
+    // Import models and sequelize only after DB is created
+    const { default: sequelize } = await import('../config/database');
+    await import('../models/Keyboard');
+    await import('../models/User');
 
-    // Import sequelize instance and sync to create tables
-    const sequelize = (await import('../config/database')).default;
+    // Authenticate and sync
+    await sequelize.authenticate();
     await sequelize.sync({ force: true });
 
     console.log('✅ Test database setup completed successfully!');
