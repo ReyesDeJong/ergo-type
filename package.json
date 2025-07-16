@@ -16,6 +16,9 @@
     "lint:fix:frontend": "cd apps/frontend && eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "type-check": "npm run type-check:backend && npm run type-check:frontend",
+    "type-check:backend": "npm run type-check --workspace=@ergo-type/backend",
+    "type-check:frontend": "npm run type-check --workspace=@ergo-type/frontend",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {

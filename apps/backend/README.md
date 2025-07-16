@@ -30,13 +30,15 @@ src/
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+
+- Node.js 20+ (recommended for full workspace support)
 - PostgreSQL 15+
 - npm
 
 ### Installation & Setup
 
-1. **Install dependencies**
+> **Note**: This is part of a monorepo. For full setup instructions, see the [root README](../../README.md).
+
+1. **Install dependencies** (from root directory)
    ```bash
    npm install
    ```
@@ -186,10 +188,17 @@ describe('GET /api/keyboards', () => {
 
 ### Development
 ```bash
+# From backend directory
 npm run dev           # Start development server with hot reload
 npm run build         # Build for production
 npm run start         # Start production server
 npm run type-check    # TypeScript type checking
+
+# From root directory (using workspaces)
+npm run dev --workspace=@ergo-type/backend     # Start development server
+npm run build --workspace=@ergo-type/backend   # Build for production
+npm run test --workspace=@ergo-type/backend    # Run tests
+npm run type-check --workspace=@ergo-type/backend  # Type checking
 ```
 
 ### Code Quality

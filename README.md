@@ -65,7 +65,7 @@ ergo-type/
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+
+- Node.js 20+ (recommended for full workspace support)
 - PostgreSQL 15+
 - npm
 
@@ -104,21 +104,69 @@ npm run dev
 
 #### From Root Directory
 ```bash
-npm run lint          # Lint all files in the project
-npm run format        # Format all files with Prettier
-npm run lint:fix      # Auto-fix linting issues
+# Code Quality
+npm run lint                    # Lint all files in the project
+npm run lint:fix               # Auto-fix linting issues
+npm run format                 # Format all files with Prettier
+npm run format:check           # Check formatting without changes
+
+# Type Checking
+npm run type-check             # Type check both backend and frontend
+npm run type-check:backend     # Type check backend only
+npm run type-check:frontend    # Type check frontend only
+
+# Testing
+npm run test --workspace=@ergo-type/backend    # Run backend tests
+npm run test --workspace=@ergo-type/frontend   # Run frontend tests
+
+# Development
+npm run dev --workspace=@ergo-type/backend     # Start backend dev server
+npm run dev --workspace=@ergo-type/frontend    # Start frontend dev server
 ```
 
 ## 🔧 Development Workflow
 
-### Code Quality
+### Code Quality & Pre-commit Hooks
 This project uses pre-commit hooks to ensure code quality:
 
 1. **Prettier**: Automatically formats code
 2. **ESLint**: Checks for code quality issues
-3. **TypeScript**: Type checking
+3. **TypeScript**: Type checking for both backend and frontend
 
 The hooks run automatically on staged files when you commit. If there are unfixable linting errors, the commit will be blocked until you fix them.
+
+### Continuous Integration (CI/CD)
+The project includes a comprehensive GitHub Actions workflow that runs on every push and pull request:
+
+#### CI Pipeline Steps:
+1. **Setup**: Node.js 20 + npm caching
+2. **Install**: `npm ci` (installs all workspace dependencies)
+3. **Lint**: Backend and frontend linting
+4. **Format**: Code formatting check
+5. **Type Check**: TypeScript compilation for both apps
+6. **Test**: Jest (backend) + Vitest (frontend) with PostgreSQL service
+7. **Build**: Frontend build verification
+8. **Coverage**: Upload test coverage reports
+
+#### What Gets Checked:
+- ✅ **Code Quality**: ESLint + Prettier formatting
+- ✅ **Type Safety**: TypeScript compilation for both apps
+- ✅ **Testing**: Unit and integration tests
+- ✅ **Build Process**: Frontend production build
+- ✅ **Database**: PostgreSQL integration tests
+
+### npm Workspaces
+This project uses npm workspaces for efficient dependency management:
+
+- **Root workspace**: Contains shared dev dependencies (ESLint, Prettier, Husky)
+- **Backend workspace** (`@ergo-type/backend`): Express.js API with PostgreSQL
+- **Frontend workspace** (`@ergo-type/frontend`): React app with Vite
+
+#### Workspace Benefits:
+- **Deduplication**: Shared dependencies installed once at root
+- **Isolation**: Each app has its own specific dependencies
+- **Consistency**: Same Node.js version and environment across apps
+- **Efficiency**: Faster installs and builds
 
 ### Adding New Features
 1. Create a feature branch from `main`
@@ -146,6 +194,12 @@ The hooks run automatically on staged files when you commit. If there are unfixa
 - [x] Component testing with Vitest and React Testing Library
 - [x] Responsive design with CSS
 - [x] Keyboard preview functionality
+- [x] **TypeScript type checking** for both backend and frontend
+- [x] **Pre-commit hooks** with linting, formatting, and type checking
+- [x] **GitHub Actions CI/CD** pipeline with comprehensive testing
+- [x] **npm workspace commands** for efficient development
+- [x] **Test coverage reporting** for both apps
+- [x] **Build verification** for frontend production builds
 
 ### 🚧 In Progress
 - [ ] Comprehensive test coverage

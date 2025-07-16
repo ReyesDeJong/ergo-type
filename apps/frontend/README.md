@@ -14,10 +14,12 @@ A modern React TypeScript frontend for the Ergo Type keyboard store.
 
 ### Prerequisites
 
-- Node.js 18+
-- npm or yarn
+- Node.js 20+ (recommended for full workspace support)
+- npm
 
 ### Installation
+
+> **Note**: This is part of a monorepo. For full setup instructions, see the [root README](../../README.md).
 
 ```bash
 npm install
@@ -50,21 +52,33 @@ npm run build
 ### Testing
 
 ```bash
-# Run tests
-npm test
+# From frontend directory
+npm test                    # Run tests
+npm run test:ui            # Run tests with UI
+npm run test:coverage      # Run tests with coverage
 
-# Run tests with UI
-npm run test:ui
+# From root directory (using workspaces)
+npm run test --workspace=@ergo-type/frontend
+```
 
-# Run tests with coverage
-npm run test:coverage
+### Type Checking
+
+```bash
+# From frontend directory
+npm run type-check
+
+# From root directory (using workspaces)
+npm run type-check --workspace=@ergo-type/frontend
 ```
 
 ### Linting and Formatting
 
 ```bash
-# Lint code
+# From frontend directory
 npm run lint
+
+# From root directory (using workspaces)
+npm run lint --workspace=@ergo-type/frontend
 ```
 
 ## Project Structure
@@ -94,3 +108,15 @@ The frontend connects to the backend API defined in the `.env` file. Make sure t
 - **React Testing Library** - Component testing
 - **ESLint** - Code linting
 - **Prettier** - Code formatting
+
+## CI/CD Integration
+
+This frontend is part of a comprehensive CI/CD pipeline that includes:
+
+- **Automated Testing**: Vitest tests run on every commit
+- **Type Checking**: TypeScript compilation verification
+- **Code Quality**: ESLint and Prettier checks
+- **Build Verification**: Production build testing
+- **Coverage Reporting**: Test coverage tracking
+
+For more details, see the [root README](../../README.md#continuous-integration-cicd).
