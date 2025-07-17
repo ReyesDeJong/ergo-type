@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import splitLogo from '/split.svg';
 import './Navbar.css';
+import { useNavigate } from 'react-router-dom';
 
 interface User {
   id: number;
@@ -12,6 +13,7 @@ interface User {
 const Navbar = () => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     checkAuthStatus();
@@ -34,13 +36,11 @@ const Navbar = () => {
   };
 
   const handleLogin = () => {
-    // TODO: Implement login navigation
-    console.log('Login clicked');
+    navigate('/login');
   };
 
   const handleSignup = () => {
-    // TODO: Implement signup navigation
-    console.log('Signup clicked');
+    navigate('/signup');
   };
 
   const handleLogout = async () => {
