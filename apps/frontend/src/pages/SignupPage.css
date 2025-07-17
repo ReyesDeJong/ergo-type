@@ -1,0 +1,46 @@
+.signup-page {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+.form-group input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.error {
+  color: #c00;
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
+}
+.success {
+  color: #080;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+.password-requirements {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+.password-requirements li {
+  list-style: disc;
+}

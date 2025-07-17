@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import KeyboardCard from './KeyboardCard';
-import type { Keyboard } from '../types/keyboard';
+import KeyboardCard from '../../components/KeyboardCard';
+import type { Keyboard } from '../../types/keyboard';
 
 const mockKeyboard: Keyboard = {
   id: 1,
