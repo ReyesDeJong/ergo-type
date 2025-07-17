@@ -176,13 +176,11 @@ describe('Auth Login Routes', () => {
         password: 'Password123!',
       };
 
-      // First login
       const response1 = await request(app)
         .post('/api/auth/login')
         .send(loginData)
         .expect(200);
 
-      // Second login with same credentials
       const response2 = await request(app)
         .post('/api/auth/login')
         .send(loginData)
