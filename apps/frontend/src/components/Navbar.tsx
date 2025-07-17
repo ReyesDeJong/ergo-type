@@ -70,11 +70,7 @@ const Navbar = () => {
         {loading && <div className='loading-spinner'></div>}
         {!loading && user && (
           <div className='user-section'>
-            <div
-              className='user-avatar'
-              onClick={handleLogout}
-              title='Click to logout'
-            >
+            <div className='user-avatar' onClick={handleLogout} title='Logout'>
               <span className='user-initials'>
                 {getUserInitial(user.email)}
               </span>
