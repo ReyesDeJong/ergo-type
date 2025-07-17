@@ -10,7 +10,7 @@ export default tseslint.config(
   },
   // JavaScript files (migrations, seeders, config files)
   {
-    files: ['**/*.js', 'migrations/**/*.js', 'seeders/**/*.js'],
+    files: ['**/*.js', '**/*.mjs', 'migrations/**/*.js', 'seeders/**/*.js'],
     languageOptions: {
       sourceType: 'commonjs',
       ecmaVersion: 2022,
