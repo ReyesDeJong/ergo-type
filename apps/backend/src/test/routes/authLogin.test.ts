@@ -12,7 +12,6 @@ describe('Auth Login Routes', () => {
     let testUser: InstanceType<typeof User>;
 
     beforeEach(async () => {
-      // Create a test user for login tests
       const hashedPassword = await bcrypt.hash('Password123!', 10);
       testUser = await User.create({
         email: 'test@example.com',
@@ -36,7 +35,6 @@ describe('Auth Login Routes', () => {
       expect(response.body.user.email).toBe(loginData.email);
       expect(response.body.user).not.toHaveProperty('password');
 
-      // Check that JWT cookie is set
       const cookies = response.headers['set-cookie'];
       expect(cookies).toBeDefined();
       expect(cookies).toHaveLength(1);

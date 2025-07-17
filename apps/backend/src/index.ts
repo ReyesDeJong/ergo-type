@@ -3,9 +3,11 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import { keyboardRoutes } from './routes/keyboards';
 import { authSignupRoutes } from './routes/authSignup';
 import { loginRoutes } from './routes/authLogin';
+import { authMeRoutes } from './routes/authMe';
 import { errorHandler } from './middleware/errorHandler';
 import { initializeDatabase } from './models';
 
@@ -24,11 +26,13 @@ app.use(
 );
 app.use(morgan('combined'));
 app.use(express.json());
+app.use(cookieParser());
 
 // Routes
 app.use('/api/keyboards', keyboardRoutes);
 app.use('/api/auth', authSignupRoutes);
 app.use('/api/auth', loginRoutes);
+app.use('/api/auth', authMeRoutes);
 
 // Health check
 app.get('/health', (_req, res) => {
