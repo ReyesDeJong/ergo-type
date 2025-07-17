@@ -1,6 +1,8 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import rateLimit from 'express-rate-limit';
 import { User } from '../models';
+import UserModel from '../models/User';
 import { requireEnv } from '../utils/env';
 
 const router = Router();
@@ -18,8 +20,17 @@ interface AuthenticatedRequest extends Request {
   user?: {
     id: number;
     email: string;
+    userData: UserModel;
   };
 }
+
+const authRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: { error: 'Too many requests from this IP, please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 const authenticateToken = async (
   req: AuthenticatedRequest,
@@ -45,6 +56,7 @@ const authenticateToken = async (
     req.user = {
       id: decoded.id,
       email: decoded.email,
+      userData: user,
     };
 
     next();
@@ -68,6 +80,7 @@ const authenticateToken = async (
 // GET /api/auth/me - Get current user info
 router.get(
   '/me',
+  authRateLimit,
   authenticateToken,
   async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
@@ -75,11 +88,7 @@ router.get(
         return res.status(401).json({ error: 'User not authenticated' });
       }
 
-      const user = await User.findByPk(req.user.id);
-      if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-      }
-
+      const user = req.user.userData;
       const userData = user.toJSON();
       const userResponse = {
         id: userData.id,
