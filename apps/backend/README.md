@@ -158,8 +158,8 @@ npm run test:watch
 # Run tests with coverage
 npm run test:coverage
 
-# Initialize and sync test database
-npm run test:init-and-sync-db
+# Initialize test database
+npm run test:init
 
 # Drop test database
 npm run test:drop-db

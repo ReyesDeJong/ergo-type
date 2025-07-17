@@ -10,7 +10,7 @@
     "test": "NODE_ENV=test jest",
     "test:watch": "NODE_ENV=test jest --watch",
     "test:coverage": "NODE_ENV=test jest --coverage",
-    "test:init-and-sync-db": "NODE_ENV=test npm run test:drop-db && tsx -r tsconfig-paths/register src/scripts/init-and-sync-test-database.ts",
+    "test:init": "NODE_ENV=test npm run test:drop-db && tsx -r tsconfig-paths/register src/scripts/init-test-database.ts",
     "test:drop-db": "NODE_ENV=test tsx -r tsconfig-paths/register src/scripts/drop-test-database.ts",
     "lint": "eslint . --config eslint.config.mjs",
     "lint:fix": "eslint . --config eslint.config.mjs --fix",

@@ -76,17 +76,6 @@ async function setupTestDatabase() {
 
     // Create database if it doesn't exist
     await createDatabaseIfNotExists(databaseUrl);
-
-    // Import models and sequelize only after DB is created
-    const { default: sequelize } = await import('../config/database');
-    await import('../models/Keyboard');
-    await import('../models/User');
-
-    // Authenticate and sync
-    await sequelize.authenticate();
-    await sequelize.sync({ force: true });
-
-    console.log('✅ Test database setup completed successfully!');
     process.exit(0);
   } catch (error) {
     console.error('❌ Failed to setup test database:', error);
