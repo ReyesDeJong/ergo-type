@@ -34,8 +34,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -92,9 +90,9 @@ button:focus-visible {
   :root {
     --text-primary: #e2e8f0;
     --text-secondary: #a0aec0;
-    --background-primary: #1a202c;
-    --background-secondary: #2d3748;
-    --border-color: #4a5568;
+    --background-primary: #38599a;
+    --background-secondary: #204a94;
+    --border-color: #2c4570;
     --shadow-color: rgba(0, 0, 0, 0.3);
     --link-color: #63b3ed;
     --link-hover-color: #4299e1;
