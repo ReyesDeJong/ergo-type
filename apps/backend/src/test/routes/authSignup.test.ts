@@ -17,7 +17,7 @@ describe('Auth Routes', () => {
       const response = await request(app)
         .post('/api/auth/signup')
         .send(userData)
-        .expect(201);
+        .expect(200);
 
       expect(response.body).toHaveProperty('message');
       expect(response.body).toHaveProperty('user');
@@ -115,13 +115,13 @@ describe('Auth Routes', () => {
       };
 
       // Create first user
-      await request(app).post('/api/auth/signup').send(userData).expect(201);
+      await request(app).post('/api/auth/signup').send(userData).expect(200);
 
       // Try to create second user with same email
       const response = await request(app)
         .post('/api/auth/signup')
         .send(userData)
-        .expect(201);
+        .expect(200);
 
       expect(response.body).toHaveProperty('message');
       expect(response.body.message).toContain(
@@ -179,7 +179,7 @@ describe('Auth Routes', () => {
         const response = await request(app)
           .post('/api/auth/signup')
           .send(userData)
-          .expect(201);
+          .expect(200);
 
         expect(response.body).toHaveProperty('message');
         expect(response.body).toHaveProperty('user');

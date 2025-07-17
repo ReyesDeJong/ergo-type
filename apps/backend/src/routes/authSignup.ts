@@ -34,7 +34,7 @@ authSignupRoutes.post('/signup', async (req, res, next) => {
 
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      return res.status(201).json({
+      return res.status(200).json({
         message:
           "If an account with this email doesn't exist, it has been created successfully",
       });
@@ -56,7 +56,7 @@ authSignupRoutes.post('/signup', async (req, res, next) => {
       updatedAt: userData.updatedAt,
     };
 
-    return res.status(201).json({
+    return res.status(200).json({
       message:
         "If an account with this email doesn't exist, it has been created successfully",
       user: userResponse,
