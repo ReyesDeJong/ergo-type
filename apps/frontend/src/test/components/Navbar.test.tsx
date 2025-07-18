@@ -3,6 +3,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import Navbar from '../../components/Navbar';
 import { BrowserRouter } from 'react-router-dom';
+import { UserProvider } from '../../contexts/UserContext.tsx';
 import '@testing-library/jest-dom';
 
 let mockNavigate = vi.fn();
@@ -31,30 +32,31 @@ describe('Navbar', () => {
     global.fetch = originalFetch;
   });
 
-  it('shows loading spinner initially', () => {
+  const renderWithProvider = () =>
     render(
       <BrowserRouter>
-        <Navbar />
+        <UserProvider>
+          <Navbar />
+        </UserProvider>
       </BrowserRouter>
     );
+
+  it('shows loading spinner initially', () => {
+    renderWithProvider();
     expect(screen.getByRole('navigation')).toBeInTheDocument();
     expect(document.querySelector('.loading-spinner')).toBeInTheDocument();
   });
 
   it('shows login/signup when not authenticated', async () => {
     global.fetch = vi.fn().mockResolvedValue({ ok: false });
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
-    );
+    renderWithProvider();
     await waitFor(() => {
       expect(screen.getByText('Login')).toBeInTheDocument();
       expect(screen.getByText('Signup')).toBeInTheDocument();
     });
   });
 
-  it('shows user avatar when authenticated', async () => {
+  it('shows user avatar and logout when authenticated', async () => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({
@@ -66,23 +68,16 @@ describe('Navbar', () => {
         },
       }),
     });
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
-    );
+    renderWithProvider();
     await waitFor(() => {
       expect(screen.getByText('T')).toBeInTheDocument();
+      expect(screen.getByText('Logout')).toBeInTheDocument();
     });
   });
 
-  it('calls navigate on login/signup button click', async () => {
+  it('navigates on login/signup click', async () => {
     global.fetch = vi.fn().mockResolvedValue({ ok: false });
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
-    );
+    renderWithProvider();
     await waitFor(() => {
       fireEvent.click(screen.getByText('Login'));
       expect(mockNavigate).toHaveBeenCalledWith('/login');
@@ -91,7 +86,7 @@ describe('Navbar', () => {
     });
   });
 
-  it('logs out when avatar is clicked', async () => {
+  it('logs out when logout button clicked', async () => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,
       json: async () => ({
@@ -103,15 +98,12 @@ describe('Navbar', () => {
         },
       }),
     });
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
-    );
+    renderWithProvider();
+    await waitFor(() => screen.getByText('Logout'));
+    fireEvent.click(screen.getByText('Logout'));
     await waitFor(() => {
-      const avatar = screen.getByTitle('Logout');
-      fireEvent.click(avatar);
       expect(screen.queryByText('T')).not.toBeInTheDocument();
+      expect(screen.getByText('Login')).toBeInTheDocument();
     });
   });
 });
