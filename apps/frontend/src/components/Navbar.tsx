@@ -1,39 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useUser } from '../hooks/useUser';
 import splitLogo from '/split.svg';
 import './Navbar.css';
 import { useNavigate } from 'react-router-dom';
 
-interface User {
-  id: number;
-  email: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 const Navbar = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { user, loading, setUser } = useUser();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
-
-  const checkAuthStatus = async () => {
-    try {
-      const response = await fetch('/api/auth/me', {
-        credentials: 'include',
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setUser(data.user);
-      }
-    } catch {
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleLogin = () => {
     navigate('/login');
@@ -44,7 +16,7 @@ const Navbar = () => {
   };
 
   const handleLogout = async () => {
-    // TODO: Implement logout API call
+    // todo: implement logout API call
     setUser(null);
   };
 
@@ -70,7 +42,14 @@ const Navbar = () => {
         {loading && <div className='loading-spinner'></div>}
         {!loading && user && (
           <div className='user-section'>
-            <div className='user-avatar' onClick={handleLogout} title='Logout'>
+            <button
+              className='auth-btn logout-btn'
+              onClick={handleLogout}
+              style={{ marginRight: '0.75rem' }}
+            >
+              Logout
+            </button>
+            <div className='user-avatar' title={user.email}>
               <span className='user-initials'>
                 {getUserInitial(user.email)}
               </span>
