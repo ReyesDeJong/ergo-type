@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { describe, it, expect, beforeEach } from '@jest/globals';
-import app from '../../index';
-import { Keyboard } from '../../models';
+import app from '../../../index';
+import { Keyboard } from '../../../models';
 
 describe('Keyboard API', () => {
   beforeEach(async () => {

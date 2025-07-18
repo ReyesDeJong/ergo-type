@@ -1,9 +1,9 @@
 import request from 'supertest';
-import app from '../../index';
-import { User } from '../../models';
+import app from '../../../index';
+import { User } from '../../../models';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { requireEnv } from '../../utils/env';
+import { requireEnv } from '../../../utils/env';
 
 describe('Auth Me Routes', () => {
   const JWT_SECRET = requireEnv('JWT_SECRET');
