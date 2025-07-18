@@ -1,10 +1,10 @@
 import request from 'supertest';
-import app from '../../index';
-import { User } from '../../models';
-import type { UserAttributes } from '../../models/User';
+import app from '../../../index';
+import { User } from '../../../models';
+import type { UserAttributes } from '../../../models/User';
 
 import jwt from 'jsonwebtoken';
-import { requireEnv } from '../../utils/env';
+import { requireEnv } from '../../../utils/env';
 
 const JWT_SECRET = requireEnv('JWT_SECRET');
 

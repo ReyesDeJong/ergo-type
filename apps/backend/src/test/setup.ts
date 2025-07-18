@@ -16,5 +16,11 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
+  await Promise.all(
+    Object.values(sequelize.models).map(model =>
+      model.destroy({ where: {}, truncate: true, cascade: true })
+    )
+  );
+
   await sequelize.close();
 });

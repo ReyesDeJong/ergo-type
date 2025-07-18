@@ -1,6 +1,6 @@
 import request from 'supertest';
-import app from '../../index';
-import { User } from '../../models';
+import app from '../../../index';
+import { User } from '../../../models';
 
 describe('Auth Routes', () => {
   afterEach(async () => {
