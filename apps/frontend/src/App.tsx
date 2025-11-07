@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import KeyboardPreviewPage from './pages/KeyboardPreviewPage';
+import EducationKeyboardsPage from './modules/education/pages/EducationKeyboardsPage';
 import Navbar from './components/Navbar';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
@@ -16,6 +17,10 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/keyboard/:id' element={<KeyboardPreviewPage />} />
+            <Route
+              path='/education/keyboards'
+              element={<EducationKeyboardsPage />}
+            />
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/login' element={<LoginPage />} />
           </Routes>

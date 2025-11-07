@@ -61,6 +61,17 @@ export default [
   // Frontend-specific overrides
   {
     files: ['apps/frontend/**/*.{ts,tsx}'],
+    rules: {
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+    },
     languageOptions: {
       ecmaVersion: 2020,
       sourceType: 'module',
