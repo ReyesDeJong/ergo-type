@@ -35,7 +35,10 @@ describe('LoginPage', () => {
 
   it('validates email and password before submit', async () => {
     renderWithProvider();
-    fireEvent.click(screen.getByText('Login'));
+    const form = screen
+      .getByRole('button', { name: 'Login' })
+      .closest('form') as HTMLFormElement;
+    fireEvent.submit(form);
     await waitFor(() => {
       expect(
         screen.getByText('Please enter a valid email address')
@@ -75,7 +78,7 @@ describe('LoginPage', () => {
     fireEvent.change(screen.getByLabelText('Password'), {
       target: { value: 'Password123!' },
     });
-    fireEvent.click(screen.getByText('Login'));
+    fireEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledTimes(3);

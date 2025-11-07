@@ -14,15 +14,16 @@ A modern React TypeScript frontend for the Ergo Type keyboard store.
 
 ### Prerequisites
 
-- Node.js 20+ (recommended for full workspace support)
+- Node.js 25 (recommended for full workspace support)
 - npm
+- nvm (Node Version Manager)
 
 ### Installation
 
 > **Note**: This is part of a monorepo. For full setup instructions, see the [root README](../../README.md).
 
 ```bash
-npm install
+nvm use 25 && npm install
 ```
 
 ### Environment Setup
@@ -38,7 +39,7 @@ Edit the `.env` file with your specific configuration values.
 ### Development
 
 ```bash
-npm run dev
+nvm use 25 && npm run dev
 ```
 
 The application will be available at `http://localhost:5173`
