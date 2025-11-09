@@ -1,0 +1,26 @@
+.keyboard-card {
+  background: var(--background-primary);
+  border-radius: 12px;
+  max-width: 300px;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.keyboard-card-content {
+  padding: 1rem;
+}
+
+.keyboard-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.keyboard-attribute {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: left;
+}

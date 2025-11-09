@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import KeyboardCard from '../keyboards/components/KeyboardCard';
+import './EducationKeyboardsPage.css';
 
 export interface Keyboard {
   id: number;
@@ -48,9 +49,11 @@ const EducationKeyboardsPage = () => {
   return (
     <div>
       <h1>Education Keyboards Page</h1>
-      {keyboards.map(keyboard => (
-        <KeyboardCard key={keyboard.id} keyboard={keyboard} />
-      ))}
+      <div className='keyboards-grid'>
+        {keyboards.map(keyboard => (
+          <KeyboardCard key={keyboard.id} keyboard={keyboard} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,0 +1,10 @@
+.keyboards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  justify-content: center;
+  align-items: start;
+  place-items: center;
+}
