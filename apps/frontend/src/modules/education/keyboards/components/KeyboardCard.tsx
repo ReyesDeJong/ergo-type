@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import type { Keyboard } from '../../pages/EducationKeyboardsPage';
 import './KeyboardCard.css';
 
@@ -6,12 +7,55 @@ interface KeyboardCardProps {
 }
 
 const KeyboardCard = ({ keyboard }: KeyboardCardProps) => {
+  const [orderQuantity, setOrderQuantity] = useState(0);
+  const renderCountRef = useRef(0);
+  const isInitialRenderRef = useRef(true);
+
+  const isAvailable = keyboard.stock > orderQuantity;
+
+  renderCountRef.current += 1;
+  const renderCount = renderCountRef.current;
+  const isInitialRender = isInitialRenderRef.current;
+
+  useEffect(() => {
+    if (isInitialRender) {
+      isInitialRenderRef.current = false;
+    }
+  });
+
+  const onDecreaseOrderQuantity = () => {
+    if (orderQuantity > 0) {
+      setOrderQuantity(orderQuantity - 1);
+    }
+  };
+
   return (
     <div className='keyboard-card'>
       <div className='keyboard-card-content'>
+        <div className='keyboard-render-count'>
+          <p className='keyboard-attribute'>Render Count: {renderCount}</p>
+          <p className='keyboard-attribute'>
+            Is Initial Render: {isInitialRender ? '✅' : '❌'}
+          </p>
+        </div>
         <h3 className='keyboard-name'>{keyboard.name}</h3>
+        <img
+          src={keyboard.image}
+          alt={keyboard.name}
+          className='keyboard-image'
+        />
         <p className='keyboard-attribute'>{keyboard.description}</p>
-        <p className='keyboard-attribute'>{keyboard.price}</p>
+        <div className='keyboard-bottom-attributes'>
+          <p className='keyboard-attribute'>Price: {keyboard.price}</p>
+          <p className='keyboard-attribute'>
+            Stock: {isAvailable ? '✅ Available' : '❌ Out of stock'}
+          </p>
+        </div>
+        <div className='keyboard-order-display'>
+          <button onClick={onDecreaseOrderQuantity}>-</button>
+          <p className='keyboard-attribute'>Order Quantity: {orderQuantity}</p>
+          <button onClick={() => setOrderQuantity(orderQuantity + 1)}>+</button>
+        </div>
       </div>
     </div>
   );

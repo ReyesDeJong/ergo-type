@@ -8,7 +8,7 @@ export interface Keyboard {
   price: number;
   image: string;
   description: string;
-  isAvailable: boolean;
+  stock: number;
 }
 
 const VIEW_MODE = {
@@ -21,34 +21,54 @@ const initialKeyboards: Keyboard[] = [
     id: 1,
     name: 'Ergo Type',
     price: 100,
-    image: 'https://via.placeholder.com/150',
+    image: 'https://placehold.co/150x100',
     description: 'This is a description of the keyboard',
-    isAvailable: true,
+    stock: 2,
   },
   {
     id: 2,
     name: 'Ergo Type 2',
     price: 100,
-    image: 'https://via.placeholder.com/150',
+    image: 'https://placehold.co/150x100',
     description: 'This is a description of the keyboard',
-    isAvailable: true,
+    stock: 3,
   },
   {
     id: 3,
     name: 'Ergo Type 3',
     price: 100,
-    image: 'https://via.placeholder.com/150',
+    image: 'https://placehold.co/150x100',
     description: 'This is a description of the keyboard',
-    isAvailable: false,
+    stock: 0,
   },
 ];
 
 const EducationKeyboardsPage = () => {
-  const [_viewMode, _setViewMode] = useState<string>(VIEW_MODE.grid);
+  const [viewMode, setViewMode] = useState<string>(VIEW_MODE.grid);
   const [keyboards, _setKeyboards] = useState<Keyboard[]>(initialKeyboards);
   return (
     <div>
       <h1>Education Keyboards Page</h1>
+      <div className='view-mode-buttons'>
+        {viewMode === VIEW_MODE.list && (
+          <button
+            onClick={() => {
+              setViewMode(VIEW_MODE.grid);
+            }}
+          >
+            Toggle to Grid View
+          </button>
+        )}
+        {viewMode === VIEW_MODE.grid && (
+          <button
+            onClick={() => {
+              setViewMode(VIEW_MODE.list);
+            }}
+          >
+            Toggle to List View
+          </button>
+        )}
+      </div>
       <div className='keyboards-grid'>
         {keyboards.map(keyboard => (
           <KeyboardCard key={keyboard.id} keyboard={keyboard} />
