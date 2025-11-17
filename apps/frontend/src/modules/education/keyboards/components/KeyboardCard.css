@@ -6,6 +6,38 @@
   overflow: hidden;
 }
 
+/* Initial render bñue flash */
+.keyboard-card.render-initial {
+  animation: renderFlashInitial 0.6s ease-out;
+}
+
+/* RE-renders - gren flash */
+.keyboard-card.render-update {
+  animation: renderFlashUpdate 0.6s ease-out;
+}
+
+@keyframes renderFlashInitial {
+  0% {
+    border: 3px solid #3b82f6;
+    boxshadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    border: 3px solid #2563eb;
+    box-shadow: 0 0 20px 5px rgba(59, 130, 246, 0.6);
+  }
+}
+
+@keyframes renderFlashUpdate {
+  0% {
+    border: 3px solid #10b981;
+    boxshadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  50% {
+    border: 3px solid #059669;
+    box-shadow: 0 0 20px 5px rgba(16, 185, 129, 0.6);
+  }
+}
+
 .keyboard-card-content {
   padding: 1rem;
 }

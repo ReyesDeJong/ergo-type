@@ -10,14 +10,29 @@ const KeyboardCard = ({ keyboard }: KeyboardCardProps) => {
   const [orderQuantity, setOrderQuantity] = useState(0);
   const renderCountRef = useRef(0);
   const isInitialRenderRef = useRef(true);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const isAvailable = keyboard.stock > orderQuantity;
 
   renderCountRef.current += 1;
   const renderCount = renderCountRef.current;
   const isInitialRender = isInitialRenderRef.current;
+  console.log(
+    `[RENDER PHASE] KeyboardCard (${keyboard.name}) - Render #${renderCount} - isInitialRender: ${isInitialRender}`
+  );
 
   useEffect(() => {
+    console.log(
+      `[COMMIT PHASE] KeyboardCard (${keyboard.name}) - Render #${renderCount} - isInitialRender: ${isInitialRender}`
+    );
+    const card = cardRef.current;
+    if (card) {
+      const className = isInitialRender ? 'render-initial' : 'render-update';
+      card.classList.remove('render-initial', 'render-update');
+      void card.offsetWidth;
+      card.classList.add(className);
+    }
+
     if (isInitialRender) {
       isInitialRenderRef.current = false;
     }
@@ -30,7 +45,10 @@ const KeyboardCard = ({ keyboard }: KeyboardCardProps) => {
   };
 
   return (
-    <div className='keyboard-card'>
+    <div
+      ref={cardRef}
+      className={`keyboard-card ${isInitialRender ? 'render-initial' : 'render-update'}`}
+    >
       <div className='keyboard-card-content'>
         <div className='keyboard-render-count'>
           <p className='keyboard-attribute'>Render Count: {renderCount}</p>

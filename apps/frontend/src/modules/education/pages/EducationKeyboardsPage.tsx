@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import KeyboardCard from '../keyboards/components/KeyboardCard';
 import './EducationKeyboardsPage.css';
 
@@ -46,6 +46,10 @@ const initialKeyboards: Keyboard[] = [
 const EducationKeyboardsPage = () => {
   const [viewMode, setViewMode] = useState<string>(VIEW_MODE.grid);
   const [keyboards, _setKeyboards] = useState<Keyboard[]>(initialKeyboards);
+  console.log('Render phase: EducationKeyboardsPage render');
+  useEffect(() => {
+    console.log('Commit phase: EducationKeyboardsPage render');
+  });
   return (
     <div>
       <h1>Education Keyboards Page</h1>
@@ -70,9 +74,12 @@ const EducationKeyboardsPage = () => {
         )}
       </div>
       <div className='keyboards-grid'>
-        {keyboards.map(keyboard => (
-          <KeyboardCard key={keyboard.id} keyboard={keyboard} />
-        ))}
+        {
+          // viewMode === VIEW_MODE.grid &&
+          keyboards.map(keyboard => (
+            <KeyboardCard key={keyboard.id} keyboard={keyboard} />
+          ))
+        }
       </div>
     </div>
   );
