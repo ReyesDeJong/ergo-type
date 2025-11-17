@@ -1,3 +1,22 @@
+.controls-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.discount-button {
+  display: flex;
+  align-items: center;
+}
+
+.view-mode-buttons {
+  display: flex;
+  align-items: center;
+}
+
 .keyboards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

@@ -16,6 +16,8 @@ const VIEW_MODE = {
   list: 'list',
 };
 
+export const DISCOUNT_PERCENTAGE_TO_APPLY = 10;
+
 const initialKeyboards: Keyboard[] = [
   {
     id: 1,
@@ -46,6 +48,12 @@ const initialKeyboards: Keyboard[] = [
 const EducationKeyboardsPage = () => {
   const [viewMode, setViewMode] = useState<string>(VIEW_MODE.grid);
   const [keyboards, _setKeyboards] = useState<Keyboard[]>(initialKeyboards);
+  const [isDiscountApplied, setIsDiscountApplied] = useState<boolean>(false);
+
+  const toggleDiscount = () => {
+    setIsDiscountApplied(!isDiscountApplied);
+  };
+
   console.log('Render phase: EducationKeyboardsPage render');
   useEffect(() => {
     console.log('Commit phase: EducationKeyboardsPage render');
@@ -53,31 +61,42 @@ const EducationKeyboardsPage = () => {
   return (
     <div>
       <h1>Education Keyboards Page</h1>
-      <div className='view-mode-buttons'>
-        {viewMode === VIEW_MODE.list && (
-          <button
-            onClick={() => {
-              setViewMode(VIEW_MODE.grid);
-            }}
-          >
-            Toggle to Grid View
+      <div className='controls-container'>
+        <div className='view-mode-buttons'>
+          {viewMode === VIEW_MODE.list && (
+            <button
+              onClick={() => {
+                setViewMode(VIEW_MODE.grid);
+              }}
+            >
+              Toggle to Grid View
+            </button>
+          )}
+          {viewMode === VIEW_MODE.grid && (
+            <button
+              onClick={() => {
+                setViewMode(VIEW_MODE.list);
+              }}
+            >
+              Toggle to List View
+            </button>
+          )}
+        </div>
+        <div className='discount-button'>
+          <button onClick={toggleDiscount}>
+            {isDiscountApplied ? 'Turn off discount' : 'Apply Discount'}
           </button>
-        )}
-        {viewMode === VIEW_MODE.grid && (
-          <button
-            onClick={() => {
-              setViewMode(VIEW_MODE.list);
-            }}
-          >
-            Toggle to List View
-          </button>
-        )}
+        </div>
       </div>
       <div className='keyboards-grid'>
         {
           // viewMode === VIEW_MODE.grid &&
           keyboards.map(keyboard => (
-            <KeyboardCard key={keyboard.id} keyboard={keyboard} />
+            <KeyboardCard
+              key={keyboard.id}
+              keyboard={keyboard}
+              isDiscountApplied={isDiscountApplied}
+            />
           ))
         }
       </div>
